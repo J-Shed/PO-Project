@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.sql.SQLOutput;
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class SimulationManager {
@@ -26,12 +30,12 @@ public class SimulationManager {
 //    }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println ("Ile dni ma trwać symulacja?");
+      /*  Scanner scanner = new Scanner(System.in);
+        System.out.println("Ile dni ma trwać symulacja?");
         int days = scanner.nextInt();
-        System.out.println ("Ile bakterii chcesz dodać?");
+        System.out.println("Ile bakterii chcesz dodać?");
         int numberBacteria = scanner.nextInt();
-        for (int i=0; i<numberBacteria; i++) {
+        for (int i = 0; i < numberBacteria; i++) {
             System.out.println("Podaj siłę bakterii");
             int power = scanner.nextInt();
             System.out.println("Podaj śmiertelność bakterii");
@@ -114,6 +118,42 @@ public class SimulationManager {
 //                    System.out.println(humidityModifier[j]);
 //                }
             }
+        }*/
+        File f = new File("results.csv");
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.printf("Stworzono plik results.csv\n");
+            if (f.canWrite()) {
+                try {
+                    FileWriter fw = new FileWriter(f, true);
+                    Formatter fm = new Formatter(fw);
+                    fm.format("kolumna1;kolumna2;kolumna3\r\n");
+                    fm.format("wartosc1;wartosc2;wartosc3\r\n");
+                    fm.close();
+                    fw.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                System.out.printf("Zapisane wyniki symulacji w pliku results.csv\n");
+            }
+        } else {
+            if (f.canWrite()) {
+                try {
+                    FileWriter fw = new FileWriter(f, true);
+                    Formatter fm = new Formatter(fw);
+                    fm.format("wartosc1;wartosc2;wartosc3\r\n");
+                    fm.close();
+                    fw.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                System.out.printf("Zapisano wyniki symulacji w pliku results.csv");
+            }
         }
     }
 }
+
