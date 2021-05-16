@@ -11,23 +11,23 @@ public class Human {
         return field;
     }
 
-    public addVirus(Virus virus) {
-
-    }
-
-    public update(Field[] fields, Human[] humans) {
-
-    }
-
-    public attemptInfect() {
-
-    }
-
-    public attemptDie() {
-
-    }
-
-    public attemptMove(Field[] fields) {
-
-    }
+//    public addVirus(Virus virus) {
+//
+//    }
+//
+//    public update(Field[] fields, Human[] humans) {
+//
+//    }
+//
+//    public attemptInfect() {
+//
+//    }
+//
+//    public attemptDie() {
+//
+//    }
+//
+//    public attemptMove(Field[] fields) {
+//
+//    }
 }

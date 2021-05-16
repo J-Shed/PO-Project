@@ -17,7 +17,7 @@ public class Bacteria {
         this.temperatureModifier = temperatureModifier;
     }
 
-    public update() {
+    /*public update() {
 
     }
 
@@ -27,5 +27,5 @@ public class Bacteria {
 
     protected attemptFight(int[] germs) {
 
-    }
+    }*/
 }
