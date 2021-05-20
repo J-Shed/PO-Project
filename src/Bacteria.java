@@ -1,5 +1,5 @@
 public class Bacteria {
-    protected int lifeTime =0;
+    protected int lifeTime = 0;
     protected int power;
     protected int mortality;
     protected int averageTime;
@@ -7,8 +7,7 @@ public class Bacteria {
     protected int[] humidityModifier;
     protected int[] temperatureModifier;
 
-    public Bacteria(int lifeTime, int power, int mortality, int averageTime, Strategy strategy, int[] humidityModifier, int[] temperatureModifier) {
-        this.lifeTime = lifeTime;
+    public Bacteria(int power, int mortality, int averageTime, Strategy strategy, int[] humidityModifier, int[] temperatureModifier) {
         this.power = power;
         this.mortality = mortality;
         this.averageTime = averageTime;

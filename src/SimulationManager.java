@@ -7,9 +7,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class SimulationManager {
-    private Bacteria[] bacteria;
-    private Human[] human;
-    private Field[] field;
+    private static ArrayList<Bacteria> bacteria = new ArrayList<>();
+    private static ArrayList<Human> humans = new ArrayList<>();
+    private static ArrayList<Field> fields = new ArrayList<>();
 
 //    public static void doIteration() {
 //
@@ -24,6 +24,7 @@ public class SimulationManager {
         for (int i = 0; i < numberBacteria; i++) {
             createBacteria();
         }
+        createField();
         return days;
     }
 
@@ -70,9 +71,6 @@ public class SimulationManager {
     }
 //
     private static void createBacteria() {
-        ArrayList<Bacteria> bacteria = new ArrayList<>();
-        ArrayList<Virus> viruses = new ArrayList<>();
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj siłę bakterii");
         int power = scanner.nextInt();
@@ -142,11 +140,11 @@ public class SimulationManager {
         if (userChoice3 == 1) {
             System.out.println("Podaj szansę na mutację.");
             int mutationChance = scanner.nextInt();
-            Virus virus = new Virus(0, power, mortality, averageTime, strategy, humidityModifier, temperatureModifier, mutationChance);
-            viruses.add(virus);
+            Virus virus = new Virus(power, mortality, averageTime, strategy, humidityModifier, temperatureModifier, mutationChance);
+            SimulationManager.bacteria.add(virus);
         } else {
-            Bacteria bacteria1 = new Bacteria(0, power, mortality, averageTime, strategy, humidityModifier, temperatureModifier);
-            bacteria.add(bacteria1);
+            Bacteria bacteria = new Bacteria(power, mortality, averageTime, strategy, humidityModifier, temperatureModifier);
+            SimulationManager.bacteria.add(bacteria);
         }
     }
     private static void createField() {
@@ -174,7 +172,7 @@ public class SimulationManager {
             humidity = Level.LOW;
         }
         Field field = new Field(temperature,humidity);
-
+        SimulationManager.fields.add(field);
     }
 
     public static void main(String[] args) {
