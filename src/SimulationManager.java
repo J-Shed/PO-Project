@@ -24,7 +24,19 @@ public class SimulationManager {
         for (int i = 0; i < numberBacteria; i++) {
             createBacteria();
         }
-        createField();
+        for (int i = 0; i < 25; i++) {
+            createField();
+        }
+        for (int i = 0; i < 1000; i++) {
+            createHuman();
+        }
+        for (Bacteria i : bacteria) {
+            for (int j = 0; j < 10; j++) {
+                Random random = new Random();
+                int number = random.nextInt(1000);
+                SimulationManager.humans.get(number).addBacteria(i);
+            }
+        }
         return days;
     }
 
@@ -40,7 +52,7 @@ public class SimulationManager {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            System.out.printf("Stworzono plik results.csv\n");
+            System.out.println("Stworzono plik results.csv\n");
             if (f.canWrite()) {
                 try {
                     FileWriter fw = new FileWriter(f, true);
@@ -52,7 +64,7 @@ public class SimulationManager {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-                System.out.printf("Zapisane wyniki symulacji w pliku results.csv\n");
+                System.out.println("Zapisane wyniki symulacji w pliku results.csv\n");
             }
         } else {
             if (f.canWrite()) {
@@ -65,11 +77,11 @@ public class SimulationManager {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-                System.out.printf("Zapisano wyniki symulacji w pliku results.csv");
+                System.out.println("Zapisano wyniki symulacji w pliku results.csv");
             }
         }
     }
-//
+
     private static void createBacteria() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj siłę bakterii");
@@ -147,38 +159,44 @@ public class SimulationManager {
             SimulationManager.bacteria.add(bacteria);
         }
     }
+
     private static void createField() {
         Random random = new Random();
         int levelt = random.nextInt(3);
         Level temperature;
         Level humidity;
-        if (levelt==0){
+        if (levelt == 0) {
             temperature = Level.HIGH;
-        }
-        else if(levelt==1){
+        } else if (levelt == 1) {
             temperature = Level.MODERATE;
-        }
-        else {
+        } else {
             temperature = Level.LOW;
         }
         int levelh = random.nextInt(3);
-        if (levelh==0){
+        if (levelh == 0) {
             humidity = Level.HIGH;
-        }
-        else if(levelh==1){
+        } else if (levelh == 1) {
             humidity = Level.MODERATE;
-        }
-        else {
+        } else {
             humidity = Level.LOW;
         }
-        Field field = new Field(temperature,humidity);
+        Field field = new Field(temperature, humidity);
         SimulationManager.fields.add(field);
+    }
+
+    private static void createHuman() {
+        Random random = new Random();
+        int level = random.nextInt(25);
+        Human human = new Human(SimulationManager.fields.get(level));
     }
 
     public static void main(String[] args) {
         int days = prepareSimulation();
         runSimulation(days);
         saveResults();
+        for (Human i : humans) {
+            System.out.println(i.bacteria);
+        }
     }
 }
 

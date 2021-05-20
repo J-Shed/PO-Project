@@ -1,19 +1,21 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Human {
     protected Field field;
-    protected Bacteria[] bacteria;
+    protected ArrayList<Bacteria> bacteria = new ArrayList<>();
 
-    public Human(Field field, Bacteria[] bacteria) {
+    public Human(Field field) {
         this.field = field;
-        this.bacteria = bacteria;
     }
 
     public Field getField() {
         return field;
     }
 
-//    public addVirus(Virus virus) {
-//
-//    }
+    public void addBacteria(Bacteria bacteria) {
+        this.bacteria.add(bacteria);
+    }
 //
 //    public update(Field[] fields, Human[] humans) {
 //

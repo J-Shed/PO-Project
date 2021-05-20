@@ -1,8 +1,8 @@
 public class Child extends Human {
     private int immunityWeaknessChance;
 
-    public Child(Field field, Bacteria[] bacteria, int immunityWeaknessChance) {
-        super(field, bacteria);
+    public Child(Field field, int immunityWeaknessChance) {
+        super(field);
         this.immunityWeaknessChance = immunityWeaknessChance;
     }
 
