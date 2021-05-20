@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Random;
 import java.util.Scanner;
@@ -69,6 +70,9 @@ public class SimulationManager {
     }
 //
     private static void createBacteria() {
+        ArrayList<Bacteria> bacteria = new ArrayList<>();
+        ArrayList<Virus> viruses = new ArrayList<>();
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj siłę bakterii");
         int power = scanner.nextInt();
@@ -139,8 +143,10 @@ public class SimulationManager {
             System.out.println("Podaj szansę na mutację.");
             int mutationChance = scanner.nextInt();
             Virus virus = new Virus(0, power, mortality, averageTime, strategy, humidityModifier, temperatureModifier, mutationChance);
+            viruses.add(virus);
         } else {
-            Bacteria bacteria = new Bacteria(0, power, mortality, averageTime, strategy, humidityModifier, temperatureModifier);
+            Bacteria bacteria1 = new Bacteria(0, power, mortality, averageTime, strategy, humidityModifier, temperatureModifier);
+            bacteria.add(bacteria1);
         }
     }
     private static void createField() {
@@ -175,15 +181,6 @@ public class SimulationManager {
         int days = prepareSimulation();
         runSimulation(days);
         saveResults();
-
-//                System.out.println(bacteria.lifeTime);
-//                System.out.println(bacteria.power);
-//                System.out.println(bacteria.mortality);
-//                System.out.println(bacteria.averageTime);
-//                System.out.println(bacteria.strategy);
-//                for (int j = 0; j < humidityModifier.length; j++) {
-//                    System.out.println(humidityModifier[j]);
-//                }
     }
 }
 

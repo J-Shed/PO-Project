@@ -1,5 +1,5 @@
 public class Bacteria {
-    protected int lifeTime;
+    protected int lifeTime =0;
     protected int power;
     protected int mortality;
     protected int averageTime;
