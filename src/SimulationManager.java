@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.sql.SQLOutput;
 import java.util.Formatter;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SimulationManager {
@@ -141,6 +142,33 @@ public class SimulationManager {
         } else {
             Bacteria bacteria = new Bacteria(0, power, mortality, averageTime, strategy, humidityModifier, temperatureModifier);
         }
+    }
+    private static void createField() {
+        Random random = new Random();
+        int levelt = random.nextInt(3);
+        Level temperature;
+        Level humidity;
+        if (levelt==0){
+            temperature = Level.HIGH;
+        }
+        else if(levelt==1){
+            temperature = Level.MODERATE;
+        }
+        else {
+            temperature = Level.LOW;
+        }
+        int levelh = random.nextInt(3);
+        if (levelh==0){
+            humidity = Level.HIGH;
+        }
+        else if(levelh==1){
+            humidity = Level.MODERATE;
+        }
+        else {
+            humidity = Level.LOW;
+        }
+        Field field = new Field(temperature,humidity);
+
     }
 
     public static void main(String[] args) {
