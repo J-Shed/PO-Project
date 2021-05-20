@@ -188,6 +188,7 @@ public class SimulationManager {
         Random random = new Random();
         int level = random.nextInt(25);
         Human human = new Human(SimulationManager.fields.get(level));
+        SimulationManager.humans.add(human);
     }
 
     public static void main(String[] args) {
