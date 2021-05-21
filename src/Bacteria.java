@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Bacteria {
     protected int lifeTime = 0;
     protected int power;
@@ -16,15 +18,15 @@ public class Bacteria {
         this.temperatureModifier = temperatureModifier;
     }
 
-    /*public update() {
+    public void update() {
 
     }
 
-    protected attemptDie() {
+    protected void attemptDie() {
 
     }
 
-    protected attemptFight(int[] germs) {
+    protected void attemptFight(ArrayList<Bacteria> bacteria) {
 
-    }*/
+    }
 }

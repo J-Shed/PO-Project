@@ -30,18 +30,39 @@ public class SimulationManager {
         for (int i = 0; i < 1000; i++) {
             createHuman();
         }
+        for (int i = 0; i < 100; i++) {
+            createChild();
+        }
         for (Bacteria i : bacteria) {
             for (int j = 0; j < 10; j++) {
                 Random random = new Random();
-                int number = random.nextInt(1000);
+                int number = random.nextInt(1100);
                 SimulationManager.humans.get(number).addBacteria(i);
             }
         }
         return days;
     }
 
-    private static void runSimulation(int Days) {
-
+    private static void runSimulation(int days) {
+        for (int i = 0; i<days; i++) {
+            for (Bacteria k : bacteria) {
+                k.attemptFight(bacteria);
+                k.attemptDie();
+                if (k instanceof Virus) {
+                    ((Virus) k).mutate();
+                }
+                k.update();
+            }
+            for (Human j : humans) {
+                j.attemptMove(fields);
+                j.attemptInfect();
+                j.attemptDie();
+                if (j instanceof Child) {
+                    ((Child) j).immunityWeakness();
+                }
+                j.update();
+            }
+        }
     }
 
     private static void saveResults() {
@@ -191,13 +212,21 @@ public class SimulationManager {
         SimulationManager.humans.add(human);
     }
 
+    private static void createChild() {
+        Random random = new Random();
+        int level = random.nextInt(25);
+        int immunity = random.nextInt(100);
+        Child child = new Child(SimulationManager.fields.get(level), immunity);
+        SimulationManager.humans.add(child);
+    }
+
     public static void main(String[] args) {
         int days = prepareSimulation();
         runSimulation(days);
         saveResults();
-        for (Human i : humans) {
-            System.out.println(i.bacteria);
-        }
+//        for (Human i : humans) {
+//            System.out.println(i.bacteria);
+//        }
     }
 }
 

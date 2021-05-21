@@ -16,20 +16,20 @@ public class Human {
     public void addBacteria(Bacteria bacteria) {
         this.bacteria.add(bacteria);
     }
-//
-//    public update(Field[] fields, Human[] humans) {
-//
-//    }
-//
-//    public attemptInfect() {
-//
-//    }
-//
-//    public attemptDie() {
-//
-//    }
-//
-//    public attemptMove(Field[] fields) {
-//
-//    }
+
+    public void update() {
+
+    }
+
+    public void attemptInfect() {
+
+    }
+
+    public void attemptDie() {
+
+    }
+
+    public void attemptMove(ArrayList<Field> fields) {
+
+    }
 }

@@ -6,7 +6,7 @@ public class Virus extends Bacteria {
         this.mutationChance = mutationChance;
     }
 
-//        public mutate() {
-//
-//    }
+        public void mutate() {
+
+    }
 }

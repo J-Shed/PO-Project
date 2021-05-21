@@ -6,7 +6,7 @@ public class Child extends Human {
         this.immunityWeaknessChance = immunityWeaknessChance;
     }
 
-    //    public immunityWeakness() {
-//
-//    }
+    public void immunityWeakness() {
+
+    }
 }
