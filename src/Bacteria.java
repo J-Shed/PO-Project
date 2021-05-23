@@ -19,7 +19,8 @@ public class Bacteria {
     }
 
     public void update() {
-
+        attemptFight(SimulationManager.bacteria);
+        attemptDie();
     }
 
     protected void attemptDie() {

@@ -18,7 +18,10 @@ public class Human {
     }
 
     public void update() {
-
+        boolean t = attemptMove();
+        if (t == true) move(SimulationManager.fields);
+        attemptInfect();
+        attemptDie();
     }
 
     public void attemptInfect() {
@@ -29,7 +32,16 @@ public class Human {
 
     }
 
-    public void attemptMove(ArrayList<Field> fields) {
+    public void move(ArrayList<Field> fields) {
+        Random random = new Random();
+        int level = random.nextInt(25);
+        field = fields.get(level);
+    }
 
+    public boolean attemptMove() {
+        Random random = new Random();
+        int level = random.nextInt(2);
+        if (level == 1) return true;
+        else return false;
     }
 }
