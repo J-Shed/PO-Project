@@ -1,14 +1,14 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class SimulationManager {
     public static ArrayList<Bacteria> bacteria = new ArrayList<>();
     private static ArrayList<Human> humans = new ArrayList<>();
     public static ArrayList<Field> fields = new ArrayList<>();
+    private static Iterator<Human> it = humans.iterator();
 
     public static int prepareSimulation() {
         Scanner scanner = new Scanner(System.in);
@@ -40,18 +40,9 @@ public class SimulationManager {
 
     private static void runSimulation(int days) {
         for (int i = 0; i < days; i++) {
-            for (Bacteria k : bacteria) {
-                k.update();
-                if (k instanceof Virus) {
-                    ((Virus) k).mutate();
-                }
-
-            }
-            for (Human j : humans) {
-                j.update();
-                if (j instanceof Child) {
-                    ((Child) j).immunityWeakness();
-                }
+            while(it.hasNext()){
+                Human s = it.next();
+                if(s.update())it.remove();
             }
         }
     }
@@ -210,7 +201,6 @@ public class SimulationManager {
         Child child = new Child(SimulationManager.fields.get(level), immunity);
         SimulationManager.humans.add(child);
     }
-
     public static void main(String[] args) {
         int days = prepareSimulation();
         runSimulation(days);

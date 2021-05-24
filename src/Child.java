@@ -1,11 +1,20 @@
+import java.util.Random;
+
 public class Child extends Human {
-    private int immunityWeaknessChance;
+    private int immunity;
 
-    public Child(Field field, int immunityWeaknessChance) {
+    public Child(Field field, int immunity) {
         super(field);
-        this.immunityWeaknessChance = immunityWeaknessChance;
+        this.immunity = immunity;
     }
-
+    public boolean attemptDie() {
+        Random random = new Random();
+        for(Bacteria k : bacteria){
+            int number = random.nextInt(100);
+            if(number<(k.mortality*10)*immunity) return true;
+        }
+        return false;
+    }
     public void immunityWeakness() {
 
     }
