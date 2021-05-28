@@ -15,7 +15,4 @@ public class Child extends Human {
         }
         return false;
     }
-    public void immunityWeakness() {
-
-    }
 }

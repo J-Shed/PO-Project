@@ -1,6 +1,6 @@
 public class Field {
-    private Level temperature;
-    private Level humidity;
+    public Level temperature;
+    public Level humidity;
 
     public Field(Level temperature, Level humidity) {
         this.temperature = temperature;

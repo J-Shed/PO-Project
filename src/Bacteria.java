@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Bacteria {
     protected int lifeTime = 0;
@@ -18,7 +19,8 @@ public class Bacteria {
         this.humidityModifier = humidityModifier;
         this.temperatureModifier = temperatureModifier;
     }
-    public void setField (Field field) {
+
+    public void setField(Field field) {
         this.field = field;
     }
 
@@ -28,8 +30,30 @@ public class Bacteria {
     }
 
     protected boolean attemptDie() {
-        //todo
-        return lifeTime == averageTime;
+        Random random = new Random();
+        int number = random.nextInt(100);
+        float humidity = 0;
+        float temperature = 8;
+        if (this.field.temperature == Level.HIGH) {
+            temperature = this.temperatureModifier[2] / 100;
+        }
+        if (this.field.temperature == Level.MODERATE) {
+            temperature = this.temperatureModifier[1] / 100;
+        }
+        if (this.field.temperature == Level.LOW) {
+            temperature = this.temperatureModifier[0] / 100;
+        }
+        if (this.field.humidity == Level.HIGH) {
+            humidity = this.humidityModifier[2] / 100;
+        }
+        if (this.field.humidity == Level.MODERATE) {
+            humidity = this.humidityModifier[1] / 100;
+        }
+        if (this.field.humidity == Level.LOW) {
+            humidity = this.humidityModifier[0] / 100;
+        }
+        if (number < (this.averageTime * humidity * temperature)) return true;
+        return false;
     }
 
     protected void attemptFight(ArrayList<Bacteria> bacteria) {
