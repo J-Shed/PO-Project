@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Human {
     protected Field field;
@@ -46,7 +45,7 @@ public class Human {
         Random random = new Random();
         for(Bacteria k : bacteria){
             int number = random.nextInt(100);
-            if(number<(k.mortality*10)) return true;
+            if(number<(k.mortality)) return true;
         }
         return false;
     }

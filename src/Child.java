@@ -11,7 +11,7 @@ public class Child extends Human {
         Random random = new Random();
         for(Bacteria k : bacteria){
             int number = random.nextInt(100);
-            if(number<(k.mortality*10)*immunity) return true;
+            if(number<(k.mortality)*immunity) return true;
         }
         return false;
     }

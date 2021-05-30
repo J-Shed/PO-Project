@@ -87,11 +87,11 @@ public class SimulationManager {
 
     private static void createBacteria() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj siłę bakterii");
+        System.out.println("Podaj siłę bakterii. (Liczbę od 1 do 100)");
         int power = scanner.nextInt();
-        System.out.println("Podaj śmiertelność bakterii");
+        System.out.println("Podaj śmiertelność bakterii (Liczbę od 1 do 100)");
         int mortality = scanner.nextInt();
-        System.out.println("Podaj średnią długość życia bakterii");
+        System.out.println("Podaj średnią długość życia bakterii. (Ilość dni)");
         int averageTime = scanner.nextInt();
         System.out.println("Wybierz strategię bakterii");
         for (Strategy strategy : Strategy.values()) {
@@ -153,7 +153,7 @@ public class SimulationManager {
         System.out.println("Czy bakteria może się mutować? (W naszej symulacji oznacza to, że jest wirusem.) (Jeśli tak wybierz 1, jeśli nie wybierz np. 0.");
         int userChoice3 = scanner.nextInt();
         if (userChoice3 == 1) {
-            System.out.println("Podaj szansę na mutację.");
+            System.out.println("Podaj szansę na mutację. (Liczbę od 1 do 100)");
             int mutationChance = scanner.nextInt();
             Virus virus = new Virus(power, mortality, averageTime, strategy, humidityModifier, temperatureModifier, mutationChance);
             SimulationManager.bacteria.add(virus);

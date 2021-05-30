@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Virus extends Bacteria {
     private int mutationChance;
 
@@ -6,7 +8,17 @@ public class Virus extends Bacteria {
         this.mutationChance = mutationChance;
     }
 
-        public void mutate() {
-
+    public void mutate(int mutationChance) {
+        Random random = new Random();
+        int number = random.nextInt(100);
+        if (mutationChance >= number) {
+            power += 5;
+            mortality += 5;
+        }
+    }
+    public boolean update() {
+        mutate(mutationChance);
+        attemptFight(SimulationManager.bacteria);
+        return attemptDie();
     }
 }
