@@ -16,36 +16,67 @@ public class Human {
     }
 
     public void addBacteria(Bacteria bacteria) {
-        this.bacteria.add(bacteria);
-        bacteria.setField(field);
-
+        try {
+            Bacteria bacteriac = (Bacteria) bacteria.clone();
+            bacteriac.setField(field);
+            this.bacteria.add(bacteriac);
+        } catch (CloneNotSupportedException c) {
+        }
     }
 
+
     public boolean update() {
-        boolean t = attemptMove();
         if (attemptMove()) {
             move(SimulationManager.fields);
             for (Bacteria k : bacteria) {
                 k.setField(field);
             }
         }
-        attemptInfect();
-        while (i.hasNext()){
-            Bacteria s = i.next();
-            if(s.update()) i.remove();
+        Random random = new Random();
+        for (Human j : this.field.human) {
+            int number = random.nextInt(10);
+            if (number == 1) {
+                attemptInfect(j);
+            }
+
         }
-      return  attemptDie();
+        while (i.hasNext()) {
+            Bacteria s = i.next();
+            if (s.update()) i.remove();
+        }
+        for (Human j : this.field.human) {
+            int number = random.nextInt(10);
+            if (number == 1) {
+                attemptInfect(j);
+            }
+        }
+        return attemptDie();
+
     }
 
-    public void attemptInfect() {
+
+    public void attemptInfect(Human human) {
+        Random random = new Random();
+        for (Bacteria l : human.bacteria) {
+            int number = random.nextInt(100);
+            if (number > l.power) {
+                try {
+                    Bacteria bacteriac = (Bacteria) l.clone();
+                    bacteriac.setField(field);
+                    bacteriac.lifeTime = 0;
+                    this.bacteria.add(bacteriac);
+                } catch (CloneNotSupportedException c) {
+                }
+            }
+        }
 
     }
 
     public boolean attemptDie() {
         Random random = new Random();
-        for(Bacteria k : bacteria){
+        for (Bacteria k : bacteria) {
             int number = random.nextInt(100);
-            if(number<(k.mortality)) return true;
+            if (number < (k.mortality)) return true;
         }
         return false;
     }

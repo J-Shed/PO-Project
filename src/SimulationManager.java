@@ -40,9 +40,9 @@ public class SimulationManager {
 
     private static void runSimulation(int days) {
         for (int i = 0; i < days; i++) {
-            while(it.hasNext()){
+            while (it.hasNext()) {
                 Human s = it.next();
-                if(s.update())it.remove();
+                if (s.update()) it.remove();
             }
         }
     }
@@ -192,6 +192,7 @@ public class SimulationManager {
         int level = random.nextInt(25);
         Human human = new Human(SimulationManager.fields.get(level));
         SimulationManager.humans.add(human);
+        human.field.human.add(human);
     }
 
     private static void createChild() {
@@ -201,6 +202,7 @@ public class SimulationManager {
         Child child = new Child(SimulationManager.fields.get(level), immunity);
         SimulationManager.humans.add(child);
     }
+
     public static void main(String[] args) {
         int days = prepareSimulation();
         runSimulation(days);
