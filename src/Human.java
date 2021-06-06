@@ -11,10 +11,6 @@ public class Human {
         this.field = field;
     }
 
-    public Field getField() {
-        return field;
-    }
-
     public void addBacteria(Bacteria bacteria) {
         try {
             Bacteria bacteriac = (Bacteria) bacteria.clone();
@@ -24,6 +20,10 @@ public class Human {
         }
     }
 
+    public boolean attemptFight(ArrayList<Bacteria> bacteria) {
+        if (bacteria.isEmpty() || bacteria.size() == 1) return false;
+        else return true;
+    }
 
     public boolean update() {
         if (attemptMove()) {
@@ -38,20 +38,21 @@ public class Human {
             if (number == 1) {
                 attemptInfect(j);
             }
-
         }
+            if (attemptFight(bacteria)) {
+                for (int m = 0; m < bacteria.size() - 1; m++) {
+                    for (int n = 1; n < bacteria.size(); n++) {
+                        if (bacteria.get(m).fight(bacteria.get(n)) == 2) bacteria.remove(bacteria.indexOf(n));
+                        else if (bacteria.get(m).fight(bacteria.get(n)) == 3) bacteria.remove(bacteria.indexOf(m));
+                    }
+                }
+            }
+
         while (i.hasNext()) {
             Bacteria s = i.next();
             if (s.update()) i.remove();
         }
-        for (Human j : this.field.human) {
-            int number = random.nextInt(10);
-            if (number == 1) {
-                attemptInfect(j);
-            }
-        }
         return attemptDie();
-
     }
 
 

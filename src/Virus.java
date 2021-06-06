@@ -16,9 +16,9 @@ public class Virus extends Bacteria {
             mortality += 5;
         }
     }
+
     public boolean update() {
         mutate(mutationChance);
-        attemptFight(SimulationManager.bacteria);
         return attemptDie();
     }
 }

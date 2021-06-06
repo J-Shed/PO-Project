@@ -9,12 +9,4 @@ public class Field {
         this.temperature = temperature;
         this.humidity = humidity;
     }
-
-    public Level getTemperature() {
-        return temperature;
-    }
-
-    public Level getHumidity() {
-        return humidity;
-    }
 }

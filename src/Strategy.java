@@ -3,11 +3,11 @@ public enum Strategy {
     MIXED,
     PASSIVE;
 
-//    public static Strategy fromString(String s) {
-//        if (s=="AGGRESIVE") return AGGRESIVE;
-//        else if (s=="MIXED") return MIXED;
-//        else if (s=="PASSIVE") return PASSIVE;
-//        return null;
-//    }
+    public static int strategy(Strategy s) {
+        if (s == AGGRESIVE) return 7;
+        else if (s == MIXED) return 5;
+        else if (s == PASSIVE) return 3;
+        return 0;
+    }
 }
 

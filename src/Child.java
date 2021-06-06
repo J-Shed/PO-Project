@@ -7,11 +7,12 @@ public class Child extends Human {
         super(field);
         this.immunity = immunity;
     }
+
     public boolean attemptDie() {
         Random random = new Random();
-        for(Bacteria k : bacteria){
+        for (Bacteria k : bacteria) {
             int number = random.nextInt(100);
-            if(number<(k.mortality)*immunity) return true;
+            if (number < (k.mortality) * immunity) return true;
         }
         return false;
     }

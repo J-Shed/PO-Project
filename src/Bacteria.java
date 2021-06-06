@@ -30,7 +30,6 @@ public class Bacteria {
     }
 
     public boolean update() {
-        attemptFight(SimulationManager.bacteria);
         return attemptDie();
     }
 
@@ -38,7 +37,7 @@ public class Bacteria {
         Random random = new Random();
         int number = random.nextInt(100);
         float humidity = 0;
-        float temperature = 8;
+        float temperature = 0;
         if (this.field.temperature == Level.HIGH) {
             temperature = this.temperatureModifier[2] / 100;
         }
@@ -61,7 +60,18 @@ public class Bacteria {
         return false;
     }
 
-    protected void attemptFight(ArrayList<Bacteria> bacteria) {
-
+    public int fight(Bacteria bacteria) {
+        Random random = new Random();
+        int number = random.nextInt(100);
+        if (number > 10) return 1;
+        else {
+            int n = random.nextInt(100);
+            float a = (n + this.power) * Strategy.strategy(this.strategy);
+            int m = random.nextInt(100);
+            float b = (m + bacteria.power) * Strategy.strategy(bacteria.strategy);
+            if (a > b) return 2;
+            else if (a < b) return 3;
+            else return 1;
+        }
     }
 }
