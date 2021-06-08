@@ -8,7 +8,6 @@ public class SimulationManager {
     public static ArrayList<Bacteria> bacteria = new ArrayList<>();
     private static ArrayList<Human> humans = new ArrayList<>();
     public static ArrayList<Field> fields = new ArrayList<>();
-    private static Iterator<Human> it = humans.iterator();
 
     public static int prepareSimulation() {
         Scanner scanner = new Scanner(System.in);
@@ -39,6 +38,7 @@ public class SimulationManager {
     }
 
     private static void runSimulation(int days) {
+        Iterator<Human> it = humans.iterator();
         for (int i = 0; i < days; i++) {
             while (it.hasNext()) {
                 Human s = it.next();
@@ -209,6 +209,9 @@ public class SimulationManager {
         saveResults();
 //        for (Human i : humans) {
 //            System.out.println(i.bacteria);
+//        }
+//        for (Bacteria j : bacteria) {
+//            System.out.println(j);
 //        }
     }
 }

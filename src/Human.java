@@ -5,7 +5,7 @@ import java.util.Random;
 public class Human {
     protected Field field;
     protected ArrayList<Bacteria> bacteria = new ArrayList<>();
-    protected Iterator<Bacteria> i = bacteria.iterator();
+
 
     public Human(Field field) {
         this.field = field;
@@ -48,6 +48,7 @@ public class Human {
                 }
             }
 
+        Iterator<Bacteria> i = bacteria.iterator();
         while (i.hasNext()) {
             Bacteria s = i.next();
             if (s.update()) i.remove();
