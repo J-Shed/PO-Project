@@ -11,8 +11,8 @@ public class SimulationManager {
 
     public static int prepareSimulation() {
         int FIELD_COUNT = 25;
-        int HUMANS_COUNT = 10;
-        int CHILD_COUNT = 10;
+        int HUMANS_COUNT = 1000;
+        int CHILD_COUNT = 100;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ile dni ma trwać symulacja?");
         int days = scanner.nextInt();
@@ -45,18 +45,19 @@ public class SimulationManager {
         for (int i = 0; i < days; i++) {
             while (it.hasNext()) {
                 Human s = it.next();
-                if (s.update()) it.remove();
-            }
-            for (Human r : humans) {
-                for (Bacteria e : r.bacteria) {
-                    System.out.println("1");
+                Iterator<Human> itt = s.field.human.iterator();
+                if (s.update()) {
+                    while (itt.hasNext()) {
+                        Human d = itt.next();
+                        if (d.equals(s)) itt.remove();
+                    }
+                    it.remove();
                 }
-                System.out.println("\n");
             }
         }
     }
 
-    private static void saveResults() {
+    private static void saveResults(int days) {
         File f = new File("results.csv");
         if (!f.exists()) {
             try {
@@ -69,8 +70,11 @@ public class SimulationManager {
                 try {
                     FileWriter fw = new FileWriter(f, true);
                     Formatter fm = new Formatter(fw);
-                    fm.format("kolumna1;kolumna2;kolumna3\r\n");
-                    fm.format("wartosc1;wartosc2;wartosc3\r\n");
+                    fm.format("Ilosc dni w symulacji;Ilosc ludzi na poczatku symulacji;Iloscktora przezyla do konca symulacji\r\n");
+                    fm.format(String.valueOf(days));
+                    fm.format(";1100;");
+                    fm.format(String.valueOf(humans.size()));
+                    fm.format("\r\n");
                     fm.close();
                     fw.close();
                 } catch (Exception e) {
@@ -83,7 +87,10 @@ public class SimulationManager {
                 try {
                     FileWriter fw = new FileWriter(f, true);
                     Formatter fm = new Formatter(fw);
-                    fm.format("wartosc1;wartosc2;wartosc3\r\n");
+                    fm.format(String.valueOf(days));
+                    fm.format(";1100;");
+                    fm.format(String.valueOf(humans.size()));
+                    fm.format("\r\n");
                     fm.close();
                     fw.close();
                 } catch (Exception e) {
@@ -216,14 +223,8 @@ public class SimulationManager {
     public static void main(String[] args) {
         int days = prepareSimulation();
         runSimulation(days);
-        saveResults();
-//        for (Human i : humans) {
-//            for (bacteria j : i.bacteria){
-//                System.out.println(1);
-//        }
-//        for (Bacteria j : bacteria) {
-//            System.out.println(j);
-//        }
+        saveResults(days);
+
     }
 }
 

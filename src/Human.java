@@ -79,7 +79,10 @@ public class Human {
         Random random = new Random();
         for (Bacteria k : bacteria) {
             int number = random.nextInt(100);
-            if (number < (k.mortality)) return true;
+            if (number < (k.mortality)) {
+                return true;
+            }
+            ;
         }
         return false;
     }
