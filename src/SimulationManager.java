@@ -10,6 +10,9 @@ public class SimulationManager {
     public static ArrayList<Field> fields = new ArrayList<>();
 
     public static int prepareSimulation() {
+        int FIELD_COUNT = 25;
+        int HUMANS_COUNT = 10;
+        int CHILD_COUNT = 10;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ile dni ma trwać symulacja?");
         int days = scanner.nextInt();
@@ -18,19 +21,19 @@ public class SimulationManager {
         for (int i = 0; i < numberBacteria; i++) {
             createBacteria();
         }
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < FIELD_COUNT; i++) {
             createField();
         }
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < HUMANS_COUNT; i++) {
             createHuman();
         }
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < CHILD_COUNT; i++) {
             createChild();
         }
         for (Bacteria i : bacteria) {
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 5; j++) {
                 Random random = new Random();
-                int number = random.nextInt(1100);
+                int number = random.nextInt(HUMANS_COUNT + CHILD_COUNT);
                 SimulationManager.humans.get(number).addBacteria(i);
             }
         }
@@ -43,6 +46,12 @@ public class SimulationManager {
             while (it.hasNext()) {
                 Human s = it.next();
                 if (s.update()) it.remove();
+            }
+            for (Human r : humans) {
+                for (Bacteria e : r.bacteria) {
+                    System.out.println("1");
+                }
+                System.out.println("\n");
             }
         }
     }
@@ -102,7 +111,7 @@ public class SimulationManager {
 
         System.out.println("Jaka wilgotność jest najbardziej preferowana dla tej bakterii?");
         System.out.println("1. Wysoka");
-        System.out.println("2. Umarkowana");
+        System.out.println("2. Umiarkowana");
         System.out.println("3. Niska");
 
         int userChoice = scanner.nextInt();
@@ -127,7 +136,7 @@ public class SimulationManager {
 
         System.out.println("Jaka temperatura jest najbardziej preferowana dla tej bakterii?");
         System.out.println("1. Wysoka");
-        System.out.println("2. Umarkowana");
+        System.out.println("2. Umiarkowana");
         System.out.println("3. Niska");
 
         int userChoice1 = scanner.nextInt();
@@ -201,6 +210,7 @@ public class SimulationManager {
         int immunity = random.nextInt(100);
         Child child = new Child(SimulationManager.fields.get(level), immunity);
         SimulationManager.humans.add(child);
+        child.field.human.add(child);
     }
 
     public static void main(String[] args) {
@@ -208,7 +218,8 @@ public class SimulationManager {
         runSimulation(days);
         saveResults();
 //        for (Human i : humans) {
-//            System.out.println(i.bacteria);
+//            for (bacteria j : i.bacteria){
+//                System.out.println(1);
 //        }
 //        for (Bacteria j : bacteria) {
 //            System.out.println(j);

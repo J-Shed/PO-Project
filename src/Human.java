@@ -15,6 +15,7 @@ public class Human {
         try {
             Bacteria bacteriac = (Bacteria) bacteria.clone();
             bacteriac.setField(field);
+            bacteriac.lifeTime = 0;
             this.bacteria.add(bacteriac);
         } catch (CloneNotSupportedException c) {
         }
@@ -39,14 +40,14 @@ public class Human {
                 attemptInfect(j);
             }
         }
-            if (attemptFight(bacteria)) {
-                for (int m = 0; m < bacteria.size() - 1; m++) {
-                    for (int n = 1; n < bacteria.size(); n++) {
-                        if (bacteria.get(m).fight(bacteria.get(n)) == 2) bacteria.remove(bacteria.indexOf(n));
-                        else if (bacteria.get(m).fight(bacteria.get(n)) == 3) bacteria.remove(bacteria.indexOf(m));
-                    }
+        if (attemptFight(bacteria)) {
+            for (int m = 0; m < bacteria.size() - 1; m++) {
+                for (int n = 1; n < bacteria.size(); n++) {
+                    if (bacteria.get(m).fight(bacteria.get(n)) == 2) bacteria.remove(bacteria.indexOf(n));
+                    else if (bacteria.get(m).fight(bacteria.get(n)) == 3) bacteria.remove(bacteria.indexOf(m));
                 }
             }
+        }
 
         Iterator<Bacteria> i = bacteria.iterator();
         while (i.hasNext()) {

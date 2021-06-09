@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Bacteria {
+public class Bacteria implements Cloneable {
     protected int lifeTime = 0;
     protected int power;
     protected int mortality;
