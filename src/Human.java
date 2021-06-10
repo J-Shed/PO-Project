@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Human {
+public class Human implements Cloneable {
     protected Field field;
     protected ArrayList<Bacteria> bacteria = new ArrayList<>();
 
@@ -14,10 +14,11 @@ public class Human {
     public void addBacteria(Bacteria bacteria) {
         try {
             Bacteria bacteriac = (Bacteria) bacteria.clone();
-            bacteriac.setField(field);
+            bacteriac.setField(this.field);
             bacteriac.lifeTime = 0;
             this.bacteria.add(bacteriac);
         } catch (CloneNotSupportedException c) {
+            System.out.println("CloneNotSupportedException");
         }
     }
 
@@ -28,6 +29,7 @@ public class Human {
 
     public boolean update() {
         if (attemptMove()) {
+            this.field.human.remove(this);
             move(SimulationManager.fields);
             for (Bacteria k : bacteria) {
                 k.setField(field);
@@ -35,9 +37,11 @@ public class Human {
         }
         Random random = new Random();
         for (Human j : this.field.human) {
-            int number = random.nextInt(10);
-            if (number == 1) {
-                attemptInfect(j);
+            if (!this.equals(j)) {
+                int number = random.nextInt(10);
+                if (number == 1) {
+                    attemptInfect(j);
+                }
             }
         }
         if (attemptFight(bacteria)) {
@@ -62,13 +66,14 @@ public class Human {
         Random random = new Random();
         for (Bacteria l : human.bacteria) {
             int number = random.nextInt(100);
-            if (number > l.power) {
+            if (number < l.power) {
                 try {
                     Bacteria bacteriac = (Bacteria) l.clone();
-                    bacteriac.setField(field);
+                    bacteriac.setField(l.field);
                     bacteriac.lifeTime = 0;
                     this.bacteria.add(bacteriac);
                 } catch (CloneNotSupportedException c) {
+                    System.out.println("CloneNotSupportedException");
                 }
             }
         }
@@ -91,6 +96,7 @@ public class Human {
         Random random = new Random();
         int level = random.nextInt(25);
         field = fields.get(level);
+        this.field.human.add(this);
     }
 
     public boolean attemptMove() {
