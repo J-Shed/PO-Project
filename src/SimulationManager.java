@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
@@ -66,7 +64,7 @@ public class SimulationManager {
                 try {
                     FileWriter fw = new FileWriter(f, true);
                     Formatter fm = new Formatter(fw);
-                    fm.format("Ilosc dni w symulacji;Ilosc ludzi na poczatku symulacji;Iloscktora przezyla do konca symulacji\r\n");
+                    fm.format("Ilosc dni w symulacji;Ilosc ludzi na poczatku symulacji;Ilosc ktora przezyla do konca symulacji\r\n");
                     fm.format(String.valueOf(days));
                     fm.format(";1100;");
                     fm.format(String.valueOf(humans.size()));
@@ -99,6 +97,7 @@ public class SimulationManager {
 
     private static void createBacteria() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj parametry bakteri.");
         System.out.println("Podaj siłę bakterii. (Liczbę od 1 do 100)");
         int power = scanner.nextInt();
         System.out.println("Podaj śmiertelność bakterii (Liczbę od 1 do 100)");
@@ -219,8 +218,13 @@ public class SimulationManager {
     public static void main(String[] args) {
         int days = prepareSimulation();
         runSimulation(days);
+        System.out.println("Ilosc dni w symulacji:");
+        System.out.println(days);
+        System.out.println("\nIlosc ludzi na poczatku symulacji");
+        System.out.println("1100");
+        System.out.println("\nIlosc ktora przezyla do konca symulacji");
+        System.out.println(humans.size());
         saveResults(days);
-
     }
 }
 

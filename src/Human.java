@@ -22,8 +22,8 @@ public class Human implements Cloneable {
         }
     }
 
-    public boolean attemptFight(ArrayList<Bacteria> bacteria) {
-        if (bacteria.isEmpty() || bacteria.size() == 1) return false;
+    public boolean attemptFight() {
+        if (this.bacteria.isEmpty() || this.bacteria.size() == 1) return false;
         else return true;
     }
 
@@ -44,11 +44,11 @@ public class Human implements Cloneable {
                 }
             }
         }
-        if (attemptFight(bacteria)) {
-            for (int m = 0; m < bacteria.size() - 1; m++) {
-                for (int n = 1; n < bacteria.size(); n++) {
-                    if (bacteria.get(m).fight(bacteria.get(n)) == 2) bacteria.remove(bacteria.indexOf(n));
-                    else if (bacteria.get(m).fight(bacteria.get(n)) == 3) bacteria.remove(bacteria.indexOf(m));
+        if (attemptFight()) {
+            for (int m = 0; m < this.bacteria.size(); m++) {
+                for (int n = 1; n < this.bacteria.size(); n++) {
+                    if (this.bacteria.get(m).fight(this.bacteria.get(n)) == 2) this.bacteria.remove(this.bacteria.indexOf(n));
+                    else if (this.bacteria.get(m).fight(this.bacteria.get(n)) == 3) this.bacteria.remove(this.bacteria.indexOf(m));
                 }
             }
         }
@@ -87,7 +87,6 @@ public class Human implements Cloneable {
             if (number < (k.mortality)) {
                 return true;
             }
-            ;
         }
         return false;
     }
