@@ -31,7 +31,7 @@ public class SimulationManager {
             createChild();
         }
         for (Bacteria i : bacteria) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 10; j++) {
                 Random random = new Random();
                 int number = random.nextInt(HUMANS_COUNT + CHILD_COUNT);
                 SimulationManager.humans.get(number).addBacteria(i);
@@ -45,12 +45,8 @@ public class SimulationManager {
         for (int i = 0; i < days; i++) {
             while (it.hasNext()) {
                 Human s = it.next();
-                Iterator<Human> itt = s.field.human.iterator();
                 if (s.update()) {
-                    while (itt.hasNext()) {
-                        Human d = itt.next();
-                        if (d.equals(s)) itt.remove();
-                    }
+                    s.field.human.remove(s);
                     it.remove();
                 }
             }
