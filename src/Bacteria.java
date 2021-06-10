@@ -20,13 +20,12 @@ public class Bacteria implements Cloneable {
         this.temperatureModifier = temperatureModifier;
     }
 
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-
     public void setField(Field field) {
         this.field = field;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public boolean update() {
