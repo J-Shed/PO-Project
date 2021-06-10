@@ -47,8 +47,10 @@ public class Human implements Cloneable {
         if (attemptFight()) {
             for (int m = 0; m < this.bacteria.size(); m++) {
                 for (int n = 1; n < this.bacteria.size(); n++) {
-                    if (this.bacteria.get(m).fight(this.bacteria.get(n)) == 2) this.bacteria.remove(this.bacteria.indexOf(n));
-                    else if (this.bacteria.get(m).fight(this.bacteria.get(n)) == 3) this.bacteria.remove(this.bacteria.indexOf(m));
+                    if (this.bacteria.get(m).fight(this.bacteria.get(n)) == 2)
+                        this.bacteria.remove(this.bacteria.get(n));
+                    else if (this.bacteria.get(m).fight(this.bacteria.get(n)) == 3)
+                        this.bacteria.remove(this.bacteria.get(m));
                 }
             }
         }
